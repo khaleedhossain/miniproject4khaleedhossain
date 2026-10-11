@@ -2,7 +2,7 @@
 {% block body %}
 <h1>Vuln Hub</h1>
 <p>This is your authorized target for <strong>Mini Project 4 (Cybersecurity track)</strong>.
-It has <strong>6 planted vulnerabilities</strong>. Each one hides a unique
+It has <strong>7 planted vulnerabilities</strong>. Each one hides a unique
 <code>FLAG{...}</code> that you can only read by actually exploiting the bug.</p>
 
 <p>Capture the flags, check them with <code>check_flags.py</code>, then submit them with your
@@ -16,6 +16,7 @@ proof-of-concept and report. <strong>Only test this app.</strong></p>
   <li><strong>The vault</strong> — <code>/vault</code> is for superadmins. How does the app know who is one?</li>
   <li><strong>Downloads</strong> — the download link names a file. What else can it name?</li>
   <li><strong>Recon</strong> — well-behaved crawlers read <code>/robots.txt</code> first.</li>
+  <li><strong>Partner resources</strong> — <a href="{{ url_for('go') }}?to=https://census.gov">this link</a> leaves the site. Does it check where it's sending you?</li>
 </ol>
 
 <p>Public test account (for the challenges that need a normal session):

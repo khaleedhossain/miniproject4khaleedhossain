@@ -1,7 +1,7 @@
 # Vuln Hub — INF601 Practice Pentest Target
 
 A small, intentionally vulnerable Flask web app. It is the **authorized target**
-for **Mini Project 4 (Cybersecurity track)**. It contains **6 planted
+for **Mini Project 4 (Cybersecurity track)**. It contains **7 planted
 vulnerabilities**; each one hides a unique `FLAG{...}` you can only read by
 actually exploiting the bug.
 
@@ -59,7 +59,7 @@ Then open <http://127.0.0.1:5000>. A public test account is
 
 ---
 
-## The 6 challenges
+## The 7 challenges
 
 Each is a different, common web vulnerability. Start at the home page — it has a
 short hint for each.
@@ -70,6 +70,7 @@ short hint for each.
 4. **Broken authorization** — reach `/vault` (superadmins only).
 5. **Path traversal** — make the `/download` endpoint serve a file it shouldn't.
 6. **Sensitive data exposure** — find a file that was left exposed (start with `/robots.txt`).
+7. **Open redirect** — the "partner resources" link leaves the site. Where can you send it instead?
 
 You are encouraged to **drive the exploration with Claude Code** — that is the
 point of the project. Capture each `FLAG{...}` you find.
@@ -122,13 +123,17 @@ Code"). Breakdown of what the AI did versus what I directed/reviewed:
 - Created and activated a Python virtualenv and installed `Flask`.
 - Started the app locally with `FLAG_SEED=k_hossain` and smoke-tested that it
   ran correctly.
-- Exploited all six planted vulnerabilities against the local instance using
+- Exploited all seven planted vulnerabilities against the local instance using
   `curl` (SQL injection login bypass, IDOR on `/messages/<id>`, stored XSS via
   a guestbook payload read by the simulated admin bot, cookie forging to reach
-  `/vault`, path traversal on `/download`, and reading the exposed
-  `/backups/` directory), captured each `FLAG{...}`, and saved the raw
-  request/response evidence under `evidence/`.
-- Verified all six flags with `check_flags.py --username k_hossain`.
+  `/vault`, path traversal on `/download`, reading the exposed `/backups/`
+  directory, and an open redirect via `/go?to=`), captured each `FLAG{...}`,
+  and saved the raw request/response evidence under `evidence/`.
+- Designed and added the 7th challenge (open redirect) in a separate pass,
+  using plan mode: proposed the route design and file list, got approval,
+  implemented it, then re-ran `check_flags.py` against the original six
+  flags as a regression check before adding the new finding to the report.
+- Verified all seven flags with `check_flags.py --username k_hossain`.
 - Wrote the first draft of `pentest_report.md` (vulnerability class,
   severity, PoC, evidence links, and remediation per finding) and assembled
   `submission.txt`.

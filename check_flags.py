@@ -17,7 +17,7 @@ import hmac
 import re
 import sys
 
-CHALLENGES = ["sqli", "idor", "xss", "authz", "traversal", "exposure"]
+CHALLENGES = ["sqli", "idor", "xss", "authz", "traversal", "exposure", "redirect"]
 
 # Seeds used by earlier versions of Vuln Hub when FLAG_SEED was not set.
 DEFAULT_SEEDS = ["inf601-default-seed-change-me", "change-me-before-class"]

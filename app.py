@@ -56,7 +56,7 @@ elif "@" in FLAG_SEED:
     print("WARNING: FLAG_SEED %r is not an FHSU username; your flags will only "
           "count if it is (e.g. jdoe or jdoe@fhsu.edu)." % FLAG_SEED)
 
-CHALLENGES = ["sqli", "idor", "xss", "authz", "traversal", "exposure"]
+CHALLENGES = ["sqli", "idor", "xss", "authz", "traversal", "exposure", "redirect"]
 
 
 def make_flag(name: str) -> str:
@@ -327,6 +327,17 @@ def download():
     except (OSError, ValueError):
         return Response("File not found.", status=404, mimetype="text/plain")
     return Response(data, mimetype="text/plain")
+
+
+@app.route("/go")
+def go():
+    target = request.args.get("to", "/")
+    parsed = urllib.parse.urlsplit(target)
+    if parsed.netloc and parsed.netloc != request.host:
+        # VULN (open redirect): no allowlist / same-origin check before
+        # confirming (and ultimately sending the user to) an external URL.
+        return render_template("go.html", target=target, flag=FLAGS["redirect"])
+    return redirect(target)
 
 
 @app.route("/robots.txt")

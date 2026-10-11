@@ -1,0 +1,43 @@
+HTTP/1.1 200 OK
+Server: Werkzeug/3.1.9 Python/3.14.7
+Date: Sun, 11 Oct 2026 07:20:54 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 1096
+Connection: close
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Vuln Hub — INF601 Practice Target</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header>
+    <a href="/" class="brand">Vuln Hub</a>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/login">Login</a>
+      <a href="/messages">Messages</a>
+      <a href="/guestbook">Guestbook</a>
+      <a href="/download?file=welcome.txt">Downloads</a>
+      
+    </nav>
+  </header>
+  
+  <main>
+    
+<h1>Leaving Vuln Hub</h1>
+<p class="error">This link was about to send you to an external site with no warning:</p>
+<p><code>https://evil.example.com</code></p>
+<p class="hint">A "visit our partner resources" link should never blindly trust a
+<code>to</code> parameter — that is exactly what makes an open redirect useful for
+phishing: the link starts at a domain you trust and ends up anywhere.</p>
+<p class="note">FLAG{redirect_c10316dbe42a}</p>
+
+  </main>
+  <footer>
+    <p>⚠️ Intentionally vulnerable practice target — run locally only. Not for production use.</p>
+  </footer>
+</body>
+</html>

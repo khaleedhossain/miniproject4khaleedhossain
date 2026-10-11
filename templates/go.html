@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block body %}
+<h1>Leaving Vuln Hub</h1>
+<p class="error">This link was about to send you to an external site with no warning:</p>
+<p><code>{{ target }}</code></p>
+<p class="hint">A "visit our partner resources" link should never blindly trust a
+<code>to</code> parameter — that is exactly what makes an open redirect useful for
+phishing: the link starts at a domain you trust and ends up anywhere.</p>
+<p class="note">{{ flag }}</p>
+{% endblock %}
